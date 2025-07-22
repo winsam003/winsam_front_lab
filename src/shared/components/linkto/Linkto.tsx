@@ -7,7 +7,7 @@ const Linkto = () => {
                 <Link to="/home">Home</Link>
                 <Link to="/blog">Blog</Link>
                 <Link to="/community">Community</Link>
-                <Link to="/contact">Contact</Link>
+                {/* <Link to="/contact">Contact</Link> */}
             </div>
         </div>
     );
