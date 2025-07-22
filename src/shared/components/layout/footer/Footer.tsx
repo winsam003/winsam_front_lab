@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import { MdOutlineAttachEmail } from "react-icons/md";
+import { SiBloglovin } from "react-icons/si";
+import { PiGithubLogoDuotone } from "react-icons/pi";
 
 const Footer = () => {
     return (
@@ -10,17 +13,18 @@ const Footer = () => {
                         <div className="text-[16px] text-[#E0E0E0]">winsam.xyz 블로그입니다.</div>
                     </div>
                     <div className="flex-1 p-4">
-                        <div>
+                        <div className="h-[70%]">
                             <ul>
-                                <li>email: winsam003@gmail.com</li>
-                                <li>
-                                    blog: <a href="http://blog.winsam.xyz">blog.winsam.xyz</a>
+                                <li className="text-[12px] text-white flex items-center gap-2">
+                                    <MdOutlineAttachEmail /> winsam003@gmail.com
                                 </li>
-                                <li>
-                                    git:
-                                    <a href="https://github.com/winsam003/winsam_front_lab.git">
-                                        https://github.com/winsam003/winsam_front_lab.git
-                                    </a>
+                                <li className="text-[12px] text-white flex items-center gap-2">
+                                    <SiBloglovin />
+                                    blog.winsam.xyz
+                                </li>
+                                <li className="text-[12px] text-white flex items-center gap-2">
+                                    <PiGithubLogoDuotone />
+                                    https://github.com/winsam003/winsam_front_lab.git
                                 </li>
                             </ul>
                         </div>

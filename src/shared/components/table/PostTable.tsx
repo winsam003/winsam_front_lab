@@ -1,7 +1,11 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Pagenation from "../pagenation/Pagenation";
 
-const PostTable = () => {
+type props = {
+    goToDetail: (id: number) => void,
+}
+
+const PostTable = ({goToDetail}: props) => {
     return (
         <div>
             <Table className="w-full table-fixed mb-4">
@@ -15,7 +19,7 @@ const PostTable = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow className="flex">
+                    <TableRow className="flex" onClick={() => goToDetail(1)}>
                         <TableCell className="flex-1 flex items-center justify-center">1</TableCell>
                         <TableCell className="flex-5 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
                             테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트
