@@ -1,44 +1,50 @@
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { CiSaveDown2 } from "react-icons/ci";
-import ReactMarkdown from "react-markdown";
-import { GiHamburgerMenu } from "react-icons/gi";
+import MarkdownSection from "@/domain/community/Write/MarkdownSection";
+import WriteBtnSection from "@/domain/community/Write/WriteBtnSection";
+import { BBSWriteSchema, BBSWriteSchemaDefaultValue, type BBSWriteSchemaType } from "./../../domain/community/Write/CommunityWriteSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, type Resolver } from "react-hook-form";
+import { Form } from "@/components/ui/form";
+import { useCommunityWrite } from "@/api/BBSCommon/UseBBSCommonQuery";
 import { useNavigate } from "react-router-dom";
 
 const CommunityWrite = () => {
     const navigate = useNavigate();
-    const [content, setContent] = useState("");
-    return (
-        <div className="max-w-[1024px] mx-auto w-full h-full">
-            <div className="flex gap-5 mt-4 mb-4">
-                {/* 입력창 */}
-                <textarea
-                    className="flex-1 min-h-[500px] font-4 p-4 rounded-2xl"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    placeholder="여기에 마크다운으로 글을 작성하세요..."
-                />
 
-                {/* 미리보기 */}
-                <div
-                    className="flex-1 h-[500px] p-2.5 border border-gray-300 overflow-y-auto bg-gray-50 rounded-2xl"
-                >
-                    <ReactMarkdown>{content}</ReactMarkdown>
+    const BBSWriteForm = useForm<BBSWriteSchemaType>({
+        resolver: zodResolver(BBSWriteSchema) as Resolver<BBSWriteSchemaType>,
+        defaultValues: BBSWriteSchemaDefaultValue,
+    });
+
+    const { mutate } = useCommunityWrite();
+
+    const BBSRegisterSubmitHandler = () => {
+        const params = {
+            bbs_numb: BBSWriteForm.getValues("bbs_numb"),
+            post_subj: BBSWriteForm.getValues("post_subj"),
+            post_cnts: BBSWriteForm.getValues("post_cnts"),
+        };
+
+        mutate(params, {
+            onSuccess: () => {
+                alert("등록되었습니다.");
+                BBSWriteForm.reset({ ...BBSWriteSchemaDefaultValue });
+                navigate("/community");
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        });
+    };
+
+    return (
+        <Form {...BBSWriteForm}>
+            <form onSubmit={BBSWriteForm.handleSubmit(BBSRegisterSubmitHandler)}>
+                <div className="max-w-[1024px] mx-auto w-full h-full">
+                    <MarkdownSection />
+                    <WriteBtnSection />
                 </div>
-            </div>
-            <div className="flex justify-end gap-4">
-                <Button className="h-8 text-[12px] bg-gray-500" onClick={() => {
-                        navigate("/community");
-                    }}>
-                    <GiHamburgerMenu />
-                    목록
-                </Button>
-                <Button className="h-8 text-[12px]">
-                    <CiSaveDown2 />
-                    등록
-                </Button>
-            </div>
-        </div>
+            </form>
+        </Form>
     );
 };
 export default CommunityWrite;

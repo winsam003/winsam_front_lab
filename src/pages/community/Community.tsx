@@ -1,31 +1,27 @@
-import { Button } from "@/components/ui/button";
+import { useBoardList } from "@/api/BBSCommon/UseBBSCommonQuery";
+import CommunityListButSection from "@/domain/community/CommunityListBtnSection";
 import Linkto from "@/shared/components/linkto/Linkto";
 import PostTable from "@/shared/components/table/PostTable";
-import { CiSaveDown2 } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 
 const Community = () => {
     const navigate = useNavigate();
-
     const goToDetail = (id: number) => {
         navigate(`/communityDetail/${id}`);
     };
 
+    const params = { bbs_numb: "BBS0000001", page: 1, size: 9999 };
+
+    const { data, isLoading, error } = useBoardList(params);
+
+    if (isLoading) return <div>로딩 중...</div>;
+    if (error) return <div>에러 발생: {error.message}</div>;
+    
     return (
         <div className="max-w-[1024px] mx-auto w-full h-full">
             <Linkto />
-            <div className="flex justify-end mb-4">
-                <Button
-                    className="h-8 text-[12px]"
-                    onClick={() => {
-                        navigate("/communityWrite");
-                    }}
-                >
-                    <CiSaveDown2 />
-                    등록
-                </Button>
-            </div>
-            <PostTable goToDetail={goToDetail} />
+            <CommunityListButSection />
+            <PostTable goToDetail={goToDetail} BBSList={data?.bbslist} />
         </div>
     );
 };
