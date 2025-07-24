@@ -6,22 +6,34 @@ import { useNavigate } from "react-router-dom";
 
 const Community = () => {
     const navigate = useNavigate();
+
     const goToDetail = (id: number) => {
         navigate(`/communityDetail/${id}`);
     };
 
     const params = { bbs_numb: "BBS0000001", page: 1, size: 9999 };
-
     const { data, isLoading, error } = useBoardList(params);
 
-    if (isLoading) return <div>로딩 중...</div>;
-    if (error) return <div>에러 발생: {error.message}</div>;
-    
     return (
-        <div className="max-w-[1024px] mx-auto w-full h-full">
-            <Linkto />
-            <CommunityListButSection />
-            <PostTable goToDetail={goToDetail} BBSList={data?.bbslist} />
+        <div className="max-w-screen-lg mx-auto w-full px-4 py-8 space-y-6">
+            {/* 네비게이션 링크 */}
+            <section>
+                <Linkto />
+            </section>
+
+            {/* 버튼 섹션 */}
+            <section>
+                <CommunityListButSection />
+            </section>
+
+            {/* 데이터 로딩/에러/테이블 */}
+            <section>
+                {isLoading && <div className="text-gray-600">로딩 중...</div>}
+                {error && <div className="text-red-500">에러 발생: {error.message}</div>}
+                {!isLoading && !error && (
+                    <PostTable goToDetail={goToDetail} BBSList={data?.bbslist || []} />
+                )}
+            </section>
         </div>
     );
 };

@@ -1,11 +1,12 @@
-import MarkdownSection from "@/domain/community/Write/MarkdownSection";
-import WriteBtnSection from "@/domain/community/Write/WriteBtnSection";
-import { BBSWriteSchema, BBSWriteSchemaDefaultValue, type BBSWriteSchemaType } from "./../../domain/community/Write/CommunityWriteSchema";
+import MarkdownSection from "@/domain/community/write/MarkdownSection";
+import WriteBtnSection from "@/domain/community/write/WriteBtnSection";
+import { BBSWriteSchema, BBSWriteSchemaDefaultValue, type BBSWriteSchemaType } from "../../domain/community/write/CommunityWriteSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type Resolver } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import { useCommunityWrite } from "@/api/BBSCommon/UseBBSCommonQuery";
 import { useNavigate } from "react-router-dom";
+import Linkto from "@/shared/components/linkto/Linkto";
 
 const CommunityWrite = () => {
     const navigate = useNavigate();
@@ -31,7 +32,8 @@ const CommunityWrite = () => {
                 navigate("/community");
             },
             onError: (error) => {
-                console.log(error);
+                console.error("등록 실패:", error);
+                alert("등록 중 에러가 발생했습니다.");
             },
         });
     };
@@ -39,12 +41,18 @@ const CommunityWrite = () => {
     return (
         <Form {...BBSWriteForm}>
             <form onSubmit={BBSWriteForm.handleSubmit(BBSRegisterSubmitHandler)}>
-                <div className="max-w-[1024px] mx-auto w-full h-full">
+                <div className="max-w-screen-lg mx-auto w-full px-4 py-8 space-y-6">
+                    <Linkto />
+
+                    <h2 className="text-2xl font-semibold text-gray-800">커뮤니티 글쓰기</h2>
+
                     <MarkdownSection />
+
                     <WriteBtnSection />
                 </div>
             </form>
         </Form>
     );
 };
+
 export default CommunityWrite;

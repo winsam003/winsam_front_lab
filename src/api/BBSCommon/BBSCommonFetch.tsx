@@ -1,4 +1,4 @@
-import type { BBSRegisterApi, getBBSPostList } from "./BBSCommonType";
+import type { BBSDetailApi, BBSRegisterApi, getBBSPostList } from "./BBSCommonType";
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_APP_API_URL;
@@ -16,4 +16,9 @@ export const PostBBSPost = async (data: BBSRegisterApi["params"]) => {
         },
     });
     return response.data;
+};
+
+export const BBSPostDetail = async (data: BBSDetailApi["params"]) => {
+    const { data: result } = await axios.get<BBSDetailApi["result"]>(`${API_URL}bbs/detail/${data.bbs_numb}/${data.post_numb}`);
+    return result;
 };

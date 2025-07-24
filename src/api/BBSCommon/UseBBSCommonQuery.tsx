@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import type { BBSRegisterApi, getBBSPostList } from "./BBSCommonType";
-import { BBSPostList, PostBBSPost } from "./BBSCommonFetch";
+import type { BBSDetailApi, BBSRegisterApi, getBBSPostList } from "./BBSCommonType";
+import { BBSPostDetail, BBSPostList, PostBBSPost } from "./BBSCommonFetch";
 import type { UseMutationOption } from "../Common-query-type";
 
 import { useQuery } from "@tanstack/react-query";
@@ -20,6 +20,17 @@ export const useBoardList = <T = getBBSPostList["result"]>(
 export const useCommunityWrite = (options?: UseMutationOption<BBSRegisterApi["params"]>) => {
     return useMutation({
         mutationFn: (data) => PostBBSPost(data),
+        ...options,
+    });
+};
+
+export const useBoardDetail = <T = BBSDetailApi["result"]>(
+    params: BBSDetailApi["params"],
+    options?: UseQueryOptions<BBSDetailApi["result"], Error, T>,
+) => {
+    return useQuery({
+        queryKey: ["boardDetail", params],
+        queryFn: () => BBSPostDetail(params),
         ...options,
     });
 };

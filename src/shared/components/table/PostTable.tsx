@@ -8,7 +8,6 @@ type props = {
 };
 
 const PostTable = ({ goToDetail, BBSList }: props) => {
-    console.log(BBSList);
     return (
         <div>
             <Table className="w-full table-fixed mb-4">

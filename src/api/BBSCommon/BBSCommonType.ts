@@ -11,6 +11,7 @@ export interface getBBSPostList {
     };
 }
 
+// 게시글 VO
 export interface BBSPostItem {
     bbs_no: number;
     bbs_code: string;
@@ -31,4 +32,12 @@ export interface BBSRegisterApi {
         post_subj: string;
         post_cnts: string;
     };
+}
+
+export interface BBSDetailApi {
+    params: {
+        bbs_numb: string;
+        post_numb: number;
+    };
+    result: BBSPostItem;
 }

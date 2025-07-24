@@ -3,7 +3,11 @@ import { CiSaveDown2 } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 
-const WriteBtnSection = () => {
+type props = {
+    BtnType?: string;
+};
+
+const WriteBtnSection = ({ BtnType }: props) => {
     const navigate = useNavigate();
     return (
         <div>
@@ -20,7 +24,7 @@ const WriteBtnSection = () => {
                 </Button>
                 <Button className="h-8 text-[12px]" type="submit">
                     <CiSaveDown2 />
-                    등록
+                    {BtnType ? BtnType : "등록"}
                 </Button>
             </div>
         </div>
