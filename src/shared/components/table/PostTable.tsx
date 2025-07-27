@@ -29,7 +29,7 @@ const PostTable = ({ goToDetail, BBSList }: props) => {
                             </TableCell>
                             <TableCell className="flex-2 flex items-center justify-center">{item.reg_user}</TableCell>
                             <TableCell className="flex-2 flex items-center justify-center">{item.reg_date}</TableCell>
-                            <TableCell className="flex-1 flex items-center justify-center">0</TableCell>
+                            <TableCell className="flex-1 flex items-center justify-center">{item.read_cnt}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

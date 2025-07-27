@@ -18,6 +18,15 @@ export const PostBBSPost = async (data: BBSRegisterApi["params"]) => {
     return response.data;
 };
 
+export const PatchBBSPost = async (data: BBSRegisterApi["params"]) => {
+    const response = await axios.patch(`${API_URL}bbs/update`, data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return response.data;
+};
+
 export const BBSPostDetail = async (data: BBSDetailApi["params"]) => {
     const { data: result } = await axios.get<BBSDetailApi["result"]>(`${API_URL}bbs/detail/${data.bbs_numb}/${data.post_numb}`);
     return result;

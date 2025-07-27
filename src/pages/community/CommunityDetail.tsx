@@ -1,4 +1,5 @@
 import { useBoardDetail } from "@/api/BBSCommon/UseBBSCommonQuery";
+import { Input } from "@/components/ui/input";
 import CommunityDetailBtnSection from "@/domain/community/detail/CommunityDetailBtnSection";
 import CommunityDetailCntSection from "@/domain/community/detail/CommunityDetailCntSection";
 import Linkto from "@/shared/components/linkto/Linkto";
@@ -17,8 +18,17 @@ const CommunityDetail = () => {
         <div className="max-w-screen-lg mx-auto w-full px-4 py-8 space-y-6">
             <Linkto />
 
-            <CommunityDetailBtnSection />
-
+            <CommunityDetailBtnSection postId={String(postId)} postDetail={data} />
+            <div className="flex flex-col gap-4 mt-4 mb-4">
+                <div>
+                    <Input placeholder="제목" readOnly value={data?.bbs_post_sbjt}/>
+                </div>
+                <div className="flex gap-4">
+                    <Input placeholder="작성자" readOnly value={data?.reg_user}/>
+                    <Input placeholder="작성일" readOnly value={data?.reg_date}/>
+                    <Input placeholder="조회수" readOnly value={data?.read_cnt}/>
+                </div>
+            </div>
             <section>
                 {isLoading && <div className="text-gray-600">게시글 불러오는 중...</div>}
                 {error && <div className="text-red-500">에러 발생: {error.message}</div>}

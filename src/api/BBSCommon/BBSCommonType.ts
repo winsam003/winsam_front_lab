@@ -23,6 +23,7 @@ export interface BBSPostItem {
     reg_date: string;
     updt_user: string;
     updt_date: string;
+    read_cnt: number;
 }
 
 // 게시글 등록
@@ -31,9 +32,11 @@ export interface BBSRegisterApi {
         bbs_numb: string;
         post_subj: string;
         post_cnts: string;
+        reg_user: string;
     };
 }
 
+// 게시글 상세
 export interface BBSDetailApi {
     params: {
         bbs_numb: string;

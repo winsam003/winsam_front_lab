@@ -7,6 +7,7 @@ import Contact from "./pages/contact/Contact";
 import Layout from "./shared/components/layout/Layout";
 import CommunityDetail from "./pages/community/CommunityDetail";
 import CommunityWrite from "./pages/community/CommunityWrite";
+import CommunityUpdate from "./pages/community/CommunityUpdate";
 
 function App() {
     return (
@@ -18,8 +19,9 @@ function App() {
                         <Route path="home" element={<Home />} />
                         <Route path="blog" element={<Blog />} />
                         <Route path="community" element={<Community />} />
-                        <Route path="communityWrite" element={<CommunityWrite />} />
-                        <Route path="communityDetail/:id" element={<CommunityDetail />} />
+                        <Route path="community/write" element={<CommunityWrite />} />
+                        <Route path="community/detail/:id" element={<CommunityDetail />} />
+                        <Route path="community/update/:id" element={<CommunityUpdate />} />
                         <Route path="contact" element={<Contact />} />
                     </Route>
                 </Routes>

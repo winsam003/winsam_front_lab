@@ -8,12 +8,11 @@ const Community = () => {
     const navigate = useNavigate();
 
     const goToDetail = (id: number) => {
-        navigate(`/communityDetail/${id}`);
+        navigate(`/community/detail/${id}`);
     };
 
     const params = { bbs_numb: "BBS0000001", page: 1, size: 9999 };
     const { data, isLoading, error } = useBoardList(params);
-
     return (
         <div className="max-w-screen-lg mx-auto w-full px-4 py-8 space-y-6">
             {/* 네비게이션 링크 */}
@@ -30,9 +29,7 @@ const Community = () => {
             <section>
                 {isLoading && <div className="text-gray-600">로딩 중...</div>}
                 {error && <div className="text-red-500">에러 발생: {error.message}</div>}
-                {!isLoading && !error && (
-                    <PostTable goToDetail={goToDetail} BBSList={data?.bbslist || []} />
-                )}
+                {!isLoading && !error && <PostTable goToDetail={goToDetail} BBSList={data?.bbslist || []} />}
             </section>
         </div>
     );

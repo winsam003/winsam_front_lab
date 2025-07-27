@@ -10,8 +10,15 @@ const MarkdownSection = () => {
     const { watch } = useFormContext();
     return (
         <div>
-            <div className="mt-4 mb-4">
-                <FormField name="post_subj" render={({ field }) => <Input {...field} placeholder="제목" />} />
+            <div className="flex flex-col gap-4 mt-4 mb-4">
+                <div>
+                    <FormField name="post_subj" render={({ field }) => <Input {...field} placeholder="제목" />} />
+                </div>
+                <div className="flex gap-4">
+                    <FormField name="reg_user" render={({ field }) => <Input {...field} placeholder="작성자" />} />
+                    <FormField name="reg_dttm" render={({ field }) => <Input {...field} placeholder="작성일" disabled />} />
+                    <FormField name="read_cnt" render={({ field }) => <Input {...field} placeholder="조회수" disabled />} />
+                </div>
             </div>
             <div className="border-t border-solid h-7"></div>
 
