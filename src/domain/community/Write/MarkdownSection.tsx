@@ -21,7 +21,8 @@ const MarkdownSection = () => {
             formData.append("file", file);
 
             try {
-                const res = await fetch("http://localhost:8080/file/upload", {
+                const API_URL = import.meta.env.VITE_APP_API_URL;
+                const res = await fetch(`${API_URL}file/upload`, {
                     method: "POST",
                     body: formData,
                 });
