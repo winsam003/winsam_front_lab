@@ -3,14 +3,16 @@ import { Input } from "@/components/ui/input";
 import CommunityDetailBtnSection from "@/domain/community/detail/CommunityDetailBtnSection";
 import CommunityDetailCntSection from "@/domain/community/detail/CommunityDetailCntSection";
 import Linkto from "@/shared/components/linkto/Linkto";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 const CommunityDetail = () => {
     const { id } = useParams<{ id: string }>();
-
     const postId = Number(id);
+    const queryParams = new URLSearchParams(location.search);
+    const code = queryParams.get("code") || "BBS0000001";
+
     const { data, isLoading, error } = useBoardDetail({
-        bbs_numb: "BBS0000001",
+        bbs_numb: code,
         post_numb: isNaN(postId) ? 0 : postId,
     });
 
@@ -21,12 +23,12 @@ const CommunityDetail = () => {
             <CommunityDetailBtnSection postId={String(postId)} postDetail={data} />
             <div className="flex flex-col gap-4 mt-4 mb-4">
                 <div>
-                    <Input placeholder="제목" readOnly value={data?.bbs_post_sbjt}/>
+                    <Input placeholder="제목" readOnly value={data?.bbs_post_sbjt} />
                 </div>
                 <div className="flex gap-4">
-                    <Input placeholder="작성자" readOnly value={data?.reg_user}/>
-                    <Input placeholder="작성일" readOnly value={data?.reg_date}/>
-                    <Input placeholder="조회수" readOnly value={data?.read_cnt}/>
+                    <Input placeholder="작성자" readOnly value={data?.reg_user} />
+                    <Input placeholder="작성일" readOnly value={data?.reg_date} />
+                    <Input placeholder="조회수" readOnly value={data?.read_cnt} />
                 </div>
             </div>
             <section>

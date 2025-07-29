@@ -9,7 +9,7 @@ const CommunityListBtnSection = () => {
             <Button
                 className="h-8 text-[12px]"
                 onClick={() => {
-                    navigate("/community/write");
+                    navigate("/community/bbs/common/write");
                 }}
             >
                 <CiSaveDown2 />

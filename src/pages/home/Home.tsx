@@ -12,7 +12,6 @@ const Home = () => {
             {/* 포스트 프리뷰 리스트 섹션 */}
             <section className="space-y-6">
                 <PostPreviewList />
-                <PostPreviewList />
                 {/* 혹은 반복 렌더링 시 map 사용 */}
             </section>
         </div>

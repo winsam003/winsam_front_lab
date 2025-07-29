@@ -15,13 +15,16 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Layout />}>
-                        <Route index element={<Home />} />
-                        <Route path="home" element={<Home />} />
+                        <Route index element={<Blog />} />
+                        {/* <Route path="home" element={<Home />} /> */}
                         <Route path="blog" element={<Blog />} />
                         <Route path="community" element={<Community />} />
-                        <Route path="community/write" element={<CommunityWrite />} />
-                        <Route path="community/detail/:id" element={<CommunityDetail />} />
-                        <Route path="community/update/:id" element={<CommunityUpdate />} />
+                        <Route path="community/bbs/common/write" element={<CommunityWrite />} />
+                        <Route path="community/bbs/common/detail/:id" element={<CommunityDetail />} />
+                        <Route path="community/bbs/common/update/:id" element={<CommunityUpdate />} />
+                        <Route path="/blog/bbs/common/write" element={<CommunityWrite />} />
+                        <Route path="/blog/bbs/common/detail/:id" element={<CommunityDetail />} />
+                        <Route path="/blog/bbs/common/update/:id" element={<CommunityUpdate />} />
                         <Route path="contact" element={<Contact />} />
                     </Route>
                 </Routes>

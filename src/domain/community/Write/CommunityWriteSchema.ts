@@ -7,6 +7,7 @@ export const BBSWriteSchema = z.object({
     reg_user: z.string(),
     reg_dttm: z.string(),
     read_cnt: z.number().optional(),
+    thumbnail: z.string().optional(),
 });
 
 export type BBSWriteSchemaType = z.infer<typeof BBSWriteSchema>;
@@ -18,4 +19,5 @@ export const BBSWriteSchemaDefaultValue: BBSWriteSchemaType = {
     reg_user: "",
     reg_dttm: "",
     read_cnt: 0,
+    thumbnail: "",
 };

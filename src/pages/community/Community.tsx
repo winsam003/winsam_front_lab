@@ -8,7 +8,7 @@ const Community = () => {
     const navigate = useNavigate();
 
     const goToDetail = (id: number) => {
-        navigate(`/community/detail/${id}`);
+        navigate(`/community/bbs/common/detail/${id}?code=BBS0000001`);
     };
 
     const params = { bbs_numb: "BBS0000001", page: 1, size: 9999 };

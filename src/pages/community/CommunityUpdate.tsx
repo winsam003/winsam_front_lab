@@ -16,7 +16,6 @@ const CommunityUpdate = () => {
     const path = window.location.pathname;
     const segments = path.split("/");
     const post_numb = segments[segments.length - 1];
-    console.log(postDetail);
     const BBSWriteForm = useForm<BBSWriteSchemaType>({
         resolver: zodResolver(BBSWriteSchema) as Resolver<BBSWriteSchemaType>,
         defaultValues: BBSWriteSchemaDefaultValue,
@@ -29,6 +28,7 @@ const CommunityUpdate = () => {
             reg_user: postDetail.reg_user,
             reg_dttm: postDetail.reg_date,
             read_cnt: postDetail.read_cnt,
+            thumbnail: postDetail.thumbnail,
         });
     }, [postDetail]);
 
@@ -43,6 +43,7 @@ const CommunityUpdate = () => {
             reg_user: BBSWriteForm.getValues("reg_user"),
             reg_dttm: BBSWriteForm.getValues("reg_dttm"),
             read_cnt: BBSWriteForm.getValues("read_cnt"),
+            thumbnail: BBSWriteForm.getValues("thumbnail") || "",
         };
 
         mutate(params, {

@@ -24,6 +24,7 @@ const CommunityWrite = () => {
             post_subj: BBSWriteForm.getValues("post_subj"),
             post_cnts: BBSWriteForm.getValues("post_cnts"),
             reg_user: BBSWriteForm.getValues("reg_user"),
+            thumbnail: BBSWriteForm.getValues("thumbnail") || "",
         };
 
         mutate(params, {

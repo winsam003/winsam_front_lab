@@ -24,6 +24,7 @@ export interface BBSPostItem {
     updt_user: string;
     updt_date: string;
     read_cnt: number;
+    thumbnail: string;
 }
 
 // 게시글 등록
@@ -33,6 +34,7 @@ export interface BBSRegisterApi {
         post_subj: string;
         post_cnts: string;
         reg_user: string;
+        thumbnail: string;
     };
 }
 

@@ -34,17 +34,19 @@ const Footer = () => {
 
                         {/* 네비게이션 링크 */}
                         <div className="flex flex-wrap gap-4 mt-4">
-                            <Link to="/home" className="text-white text-sm hover:underline">Home</Link>
-                            <Link to="/blog" className="text-white text-sm hover:underline">Blog</Link>
-                            <Link to="/community" className="text-white text-sm hover:underline">Community</Link>
+                            {/* <Link to="/home" className="text-white text-sm hover:underline">Home</Link> */}
+                            <Link to="/blog" className="text-white text-sm hover:underline">
+                                Blog
+                            </Link>
+                            <Link to="/community" className="text-white text-sm hover:underline">
+                                Community
+                            </Link>
                         </div>
                     </div>
                 </div>
 
                 {/* 하단: 크레딧 */}
-                <div className="mt-8 border-t border-gray-400 pt-4 flex justify-center text-xs text-gray-300">
-                    created with winsam.xyz
-                </div>
+                <div className="mt-8 border-t border-gray-400 pt-4 flex justify-center text-xs text-gray-300">created with winsam.xyz</div>
             </div>
         </div>
     );
