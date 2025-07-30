@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { MdOutlineAttachEmail } from "react-icons/md";
 import { SiBloglovin } from "react-icons/si";
 import { PiGithubLogoDuotone } from "react-icons/pi";
+import { FiCpu } from "react-icons/fi";
 
 const Footer = () => {
     return (
@@ -12,7 +13,7 @@ const Footer = () => {
                     {/* 블로그 소개 */}
                     <div className="flex-1">
                         <div className="mb-4 text-2xl text-white font-semibold">winsam.xyz 블로그 소개</div>
-                        <div className="text-sm text-[#E0E0E0]">winsam.xyz 블로그입니다.</div>
+                        <div className="text-sm text-[#E0E0E0]">API 연동도 해보고 이것저것 시도하는 개인 개발 블로그</div>
                     </div>
 
                     {/* 연락처 및 링크 */}
@@ -30,6 +31,10 @@ const Footer = () => {
                                 <PiGithubLogoDuotone />
                                 https://github.com/winsam003/winsam_front_lab.git
                             </li>
+                            <li className="flex items-center gap-2 break-all">
+                                <PiGithubLogoDuotone />
+                                https://github.com/winsam003/winsam_api_lab.git
+                            </li>
                         </ul>
 
                         {/* 네비게이션 링크 */}
@@ -46,7 +51,10 @@ const Footer = () => {
                 </div>
 
                 {/* 하단: 크레딧 */}
-                <div className="mt-8 border-t border-gray-400 pt-4 flex justify-center text-xs text-gray-300">created with winsam.xyz</div>
+                <div className="mt-8 border-t border-gray-400 pt-4 flex justify-center text-xs text-gray-300 gap-1 items-center">
+                    <FiCpu />
+                    created with winsam.xyz
+                </div>
             </div>
         </div>
     );

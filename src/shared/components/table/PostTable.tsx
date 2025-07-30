@@ -10,31 +10,52 @@ type props = {
 const PostTable = ({ goToDetail, BBSList }: props) => {
     return (
         <div>
-            <Table className="w-full table-fixed mb-4">
-                <TableHeader>
-                    <TableRow className="flex">
-                        <TableHead className="flex-1 flex items-center justify-center text-[16px]">번호</TableHead>
-                        <TableHead className="flex-5 flex items-center justify-center text-[16px]">제목</TableHead>
-                        <TableHead className="flex-2 flex items-center justify-center text-[16px]">등록자</TableHead>
-                        <TableHead className="flex-2 flex items-center justify-center text-[16px]">등록일</TableHead>
-                        <TableHead className="flex-1 flex items-center justify-center text-[16px]">조회수</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {BBSList?.map((item, index) => (
-                        <TableRow key={index} className="flex" onClick={() => goToDetail(item.bbs_no)}>
-                            <TableCell className="flex-1 flex items-center justify-center">{item.bbs_no}</TableCell>
-                            <TableCell className="flex-5 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
-                                {item.bbs_post_sbjt}
-                            </TableCell>
-                            <TableCell className="flex-2 flex items-center justify-center">{item.reg_user}</TableCell>
-                            <TableCell className="flex-2 flex items-center justify-center">{item.reg_date}</TableCell>
-                            <TableCell className="flex-1 flex items-center justify-center">{item.read_cnt}</TableCell>
+            {BBSList?.length !== 0 ? (
+                <div>
+                    <Table className="w-full table-fixed mb-4">
+                        <TableHeader>
+                            <TableRow className="flex">
+                                <TableHead className="flex-1 flex items-center justify-center text-[16px]">번호</TableHead>
+                                <TableHead className="flex-5 flex items-center justify-center text-[16px]">제목</TableHead>
+                                <TableHead className="flex-2 flex items-center justify-center text-[16px]">등록자</TableHead>
+                                <TableHead className="flex-2 flex items-center justify-center text-[16px]">등록일</TableHead>
+                                <TableHead className="flex-1 flex items-center justify-center text-[16px]">조회수</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {BBSList?.map((item, index) => (
+                                <TableRow key={index} className="flex" onClick={() => goToDetail(item.bbs_no)}>
+                                    <TableCell className="flex-1 flex items-center justify-center">{item.bbs_no}</TableCell>
+                                    <TableCell className="flex-5 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
+                                        {item.bbs_post_sbjt}
+                                    </TableCell>
+                                    <TableCell className="flex-2 flex items-center justify-center">{item.reg_user}</TableCell>
+                                    <TableCell className="flex-2 flex items-center justify-center">{item.reg_date}</TableCell>
+                                    <TableCell className="flex-1 flex items-center justify-center">{item.read_cnt}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    <Pagenation />
+                </div>
+            ) : (
+                <Table className="w-full table-fixed mb-4">
+                    <TableHeader>
+                        <TableRow className="flex">
+                            <TableHead className="flex-1 flex items-center justify-center text-[16px]">번호</TableHead>
+                            <TableHead className="flex-5 flex items-center justify-center text-[16px]">제목</TableHead>
+                            <TableHead className="flex-2 flex items-center justify-center text-[16px]">등록자</TableHead>
+                            <TableHead className="flex-2 flex items-center justify-center text-[16px]">등록일</TableHead>
+                            <TableHead className="flex-1 flex items-center justify-center text-[16px]">조회수</TableHead>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-            <Pagenation />
+                    </TableHeader>
+                    <TableBody>
+                        <TableRow className="flex">
+                            <TableCell className="flex-1 flex items-center justify-center font-bold">게시글이 없습니다.</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            )}
         </div>
     );
 };
