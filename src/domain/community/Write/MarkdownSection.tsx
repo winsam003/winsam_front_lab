@@ -12,6 +12,10 @@ import { HiOutlineLink } from "react-icons/hi";
 import { HiOutlineListBullet } from "react-icons/hi2";
 import { HiOutlineMinusSm } from "react-icons/hi";
 import { HiOutlineUpload } from "react-icons/hi";
+import { FaStrikethrough } from "react-icons/fa";
+import { FaRegSquare } from "react-icons/fa6";
+import { BsBlockquoteRight } from "react-icons/bs";
+import { RiH1, RiH2, RiH3 } from "react-icons/ri";
 
 const MarkdownSection = () => {
     const { register, watch, setValue } = useFormContext();
@@ -23,6 +27,7 @@ const MarkdownSection = () => {
             if (files.length === 0) return;
 
             const file = files[0];
+            if (!checkImage(file)) return; // 이미지 파일이 맞는지 검사
             const formData = new FormData();
             formData.append("file", file);
 
@@ -66,13 +71,13 @@ const MarkdownSection = () => {
 
         switch (key) {
             case "h1":
-                markdownFunction = "#";
+                markdownFunction = "# 제목";
                 break;
             case "h2":
-                markdownFunction = "##";
+                markdownFunction = "## 제목";
                 break;
             case "h3":
-                markdownFunction = "###";
+                markdownFunction = "### 제목";
                 break;
             case "bold":
                 markdownFunction = "**굵게**";
@@ -91,6 +96,15 @@ const MarkdownSection = () => {
                 break;
             case "hr":
                 markdownFunction = "---";
+                break;
+            case "strikethrough":
+                markdownFunction = "~~취소선~~";
+                break;
+            case "checkbox":
+                markdownFunction = "- [ ] 할 일 항목";
+                break;
+            case "quote":
+                markdownFunction = "> 인용문";
                 break;
             default:
                 break;
@@ -122,6 +136,7 @@ const MarkdownSection = () => {
     };
     const uploadFile = async (file: File) => {
         const formData = new FormData();
+        if (!checkImage(file)) return; // 이미지 파일이 맞는지 검사
         formData.append("file", file);
 
         try {
@@ -147,16 +162,24 @@ const MarkdownSection = () => {
         }
     };
 
+    const checkImage = (file: File) => {
+        if (!file.type.startsWith("image/")) {
+            alert("이미지 파일만 업로드 가능합니다.");
+            return false;
+        }
+        return true;
+    };
+
     return (
         <div>
-            <div className="flex flex-col gap-4 mt-4 mb-4">
-                <div>
+            <div className="flex gap-4 mt-4 mb-4">
+                <div className="flex-3">
                     <FormField name="post_subj" render={({ field }) => <Input {...field} placeholder="제목" />} />
                 </div>
-                <div className="flex gap-4">
+                <div className="flex-1">
                     <FormField name="reg_user" render={({ field }) => <Input {...field} placeholder="작성자" />} />
-                    <FormField name="reg_dttm" render={({ field }) => <Input {...field} placeholder="작성일" disabled />} />
-                    <FormField name="read_cnt" render={({ field }) => <Input {...field} placeholder="조회수" disabled />} />
+                    {/* <FormField name="reg_dttm" render={({ field }) => <Input {...field} placeholder="작성일" disabled />} />
+                    <FormField name="read_cnt" render={({ field }) => <Input {...field} placeholder="조회수" disabled />} /> */}
                 </div>
                 <div>
                     <FormField name="imageUrl" render={({ field }) => <Input {...field} placeholder="썸네일" hidden />} />
@@ -171,24 +194,27 @@ const MarkdownSection = () => {
                         markdownFunction("h1");
                     }}
                 />
-                <div
-                    className="cursor-pointer rounded-md pr-1 pl-1 mb-0.5 hover:bg-gray-100 transition flex items-center gap-1"
-                    onClick={() => markdownFunction("h1")}
-                >
-                    <span className="text-[14px] font-medium select-none">H1</span>
-                </div>
-                <div
-                    className="cursor-pointer rounded-md pr-1 pl-1 mb-0.5 hover:bg-gray-100 transition flex items-center gap-1"
-                    onClick={() => markdownFunction("h2")}
-                >
-                    <span className="text-[14px] font-medium select-none">H2</span>
-                </div>
-                <div
-                    className="cursor-pointer rounded-md pr-1 pl-1 mb-0.5 hover:bg-gray-100 transition flex items-center gap-1"
-                    onClick={() => markdownFunction("h3")}
-                >
-                    <span className="text-[14px] font-medium select-none">H3</span>
-                </div>
+                <RiH1
+                    className="cursor-pointer rounded-md p-1 hover:bg-gray-100 transition"
+                    size={25}
+                    onClick={() => {
+                        markdownFunction("h1");
+                    }}
+                />
+                <RiH2
+                    className="cursor-pointer rounded-md p-1 hover:bg-gray-100 transition"
+                    size={25}
+                    onClick={() => {
+                        markdownFunction("h2");
+                    }}
+                />
+                <RiH3
+                    className="cursor-pointer rounded-md p-1 hover:bg-gray-100 transition"
+                    size={25}
+                    onClick={() => {
+                        markdownFunction("h3");
+                    }}
+                />
                 <HiOutlineBold
                     className="cursor-pointer rounded-md p-1 hover:bg-gray-100 transition"
                     size={25}
@@ -229,6 +255,27 @@ const MarkdownSection = () => {
                     size={25}
                     onClick={() => {
                         markdownFunction("hr");
+                    }}
+                />
+                <FaStrikethrough
+                    className="cursor-pointer rounded-md p-1 hover:bg-gray-100 transition"
+                    size={25}
+                    onClick={() => {
+                        markdownFunction("strikethrough");
+                    }}
+                />
+                <FaRegSquare
+                    className="cursor-pointer rounded-md p-1 hover:bg-gray-100 transition"
+                    size={25}
+                    onClick={() => {
+                        markdownFunction("checkbox");
+                    }}
+                />
+                <BsBlockquoteRight
+                    className="cursor-pointer rounded-md p-1 hover:bg-gray-100 transition"
+                    size={25}
+                    onClick={() => {
+                        markdownFunction("quote");
                     }}
                 />
                 <HiOutlineUpload
@@ -274,6 +321,12 @@ const MarkdownSection = () => {
                             hr: () => <hr className="my-4 border-t border-gray-300" />,
                             a: ({ node, ...props }) => (
                                 <a className="text-blue-600 hover:underline hover:text-blue-800 transition" {...props} />
+                            ),
+                            blockquote: ({ node, ...props }) => (
+                                <blockquote
+                                    className="border-l-4 border-blue-500 bg-blue-50 text-blue-900 p-4 my-4 rounded-md"
+                                    {...props}
+                                />
                             ),
                         }}
                     >
