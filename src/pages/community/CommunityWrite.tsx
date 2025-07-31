@@ -7,14 +7,25 @@ import { Form } from "@/components/ui/form";
 import { useCommunityWrite } from "@/api/BBSCommon/UseBBSCommonQuery";
 import { useNavigate } from "react-router-dom";
 import Linkto from "@/shared/components/linkto/Linkto";
+import { useEffect } from "react";
 
 const CommunityWrite = () => {
     const navigate = useNavigate();
-
     const BBSWriteForm = useForm<BBSWriteSchemaType>({
         resolver: zodResolver(BBSWriteSchema) as Resolver<BBSWriteSchemaType>,
         defaultValues: BBSWriteSchemaDefaultValue,
     });
+
+    const userInfo = JSON.parse(sessionStorage.getItem("userInfo") || "null");
+
+    useEffect(() => {
+        if (userInfo) {
+            BBSWriteForm.reset({
+                ...BBSWriteSchemaDefaultValue,
+                reg_user: userInfo.userNickName,
+            });
+        }
+    }, []);
 
     const { mutate } = useCommunityWrite();
 
@@ -49,7 +60,6 @@ const CommunityWrite = () => {
                     <h2 className="text-2xl font-semibold text-gray-800">커뮤니티 글쓰기</h2>
 
                     <MarkdownSection />
-
                     <WriteBtnSection />
                 </div>
             </form>

@@ -20,6 +20,7 @@ import { RiH1, RiH2, RiH3 } from "react-icons/ri";
 const MarkdownSection = () => {
     const { register, watch, setValue } = useFormContext();
 
+
     const handleDrop = useCallback(
         async (e: React.DragEvent<HTMLTextAreaElement>) => {
             e.preventDefault();
@@ -169,7 +170,7 @@ const MarkdownSection = () => {
         }
         return true;
     };
-
+    
     return (
         <div>
             <div className="flex gap-4 mt-4 mb-4">
