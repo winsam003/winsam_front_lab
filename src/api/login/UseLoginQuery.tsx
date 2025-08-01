@@ -1,10 +1,13 @@
 import { useCallback, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useUserStore, type UserInfo } from "../../store/useUserInfo";
+import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
+import type { setNickName } from "./LoginType";
+import { setNickNamePost } from "./LoginFetch";
 
 const API_URL = import.meta.env.VITE_APP_API_URL;
 
-export const useGoogleLogin = () => {
+export const useGoogleLogin = (onNeedNickname?: (accessToken: string, userName: string, userEmail: string, picture: string) => void) => {
     const startLogin = useCallback(() => {
         window.open(`${API_URL}auth/google`, "_blank", "width=500,height=600");
     }, []);
@@ -17,8 +20,8 @@ export const useGoogleLogin = () => {
             const data = event.data;
             if (data.type === "google-auth-token") {
                 // 여기서 로그인 상태 업데이트하거나 UI 변경 처리
+                const accessToken = data.accessToken; // 백엔드가 보내주는 토큰
                 if (data.hasNickName === "Y") {
-                    const accessToken = data.accessToken; // 백엔드가 보내주는 토큰
                     try {
                         const decoded = jwtDecode<UserInfo>(accessToken);
                         sessionStorage.setItem("userInfo", JSON.stringify(decoded));
@@ -26,6 +29,8 @@ export const useGoogleLogin = () => {
                     } catch (err) {
                         console.error("토큰 디코딩 실패", err);
                     }
+                } else if (onNeedNickname) {
+                    onNeedNickname(accessToken, data.userName, data.userEmail, data.picture); // 닉네임 필요한 경우 콜백 실행
                 }
             }
         };
@@ -35,7 +40,7 @@ export const useGoogleLogin = () => {
         return () => {
             window.removeEventListener("message", handleMessage);
         };
-    }, []);
+    }, [onNeedNickname]);
 
     return { startLogin };
 };
@@ -59,4 +64,11 @@ export const useLogout = () => {
     }, []);
 
     return { logout };
+};
+
+export const useSetNickName = (options?: UseMutationOptions<any, Error, setNickName["params"]>) => {
+    return useMutation({
+        mutationFn: (data) => setNickNamePost(data),
+        ...options,
+    });
 };

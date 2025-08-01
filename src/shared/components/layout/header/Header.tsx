@@ -4,10 +4,59 @@ import { useGoogleLogin, useLogout } from "@/api/login/UseLoginQuery";
 import { MdLogout } from "react-icons/md";
 import { useEffect, useState } from "react";
 import type { UserInfo } from "@/store/useUserInfo";
+import { jwtDecode } from "jwt-decode";
+import NickNameModal from "../../modal/NickNameModal";
 
 const Header = () => {
-    const { startLogin } = useGoogleLogin();
+    // Header 내부 상태 추가
+    const [showModal, setShowModal] = useState(false);
+    const [pendingToken, setPendingToken] = useState<string | null>(null);
+    const [googleInfo, setGoogleInfo] = useState<UserInfo>();
+
+    // 닉네임 필요 시 모달 띄우기 콜백
+    const handleNeedNickname = (accessToken: string, userName: string, userEmail: string, picture: string) => {
+        setPendingToken(accessToken);
+        setShowModal(true);
+        setGoogleInfo({
+            name: userName,
+            email: userEmail,
+            picture: picture,
+            nickname: "",
+            email_verified: false,
+            userRole: "",
+        });
+    };
+
+    const { startLogin } = useGoogleLogin(handleNeedNickname);
     const { logout } = useLogout();
+
+    const handleNicknameSubmit = async (nickname: string) => {
+        if (!pendingToken) return;
+
+        try {
+            const response = await fetch("/api/set-nickname", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${pendingToken}`,
+                },
+                body: JSON.stringify({ nickname }),
+            });
+
+            if (response.ok) {
+                const decoded = jwtDecode<UserInfo>(pendingToken);
+                sessionStorage.setItem("userInfo", JSON.stringify(decoded));
+                window.dispatchEvent(new Event("userLoggedIn"));
+                setUserInfo(decoded);
+                setShowModal(false);
+                setPendingToken(null);
+            } else {
+                console.error("닉네임 저장 실패");
+            }
+        } catch (err) {
+            console.error("닉네임 저장 오류", err);
+        }
+    };
 
     const [userInfo, setUserInfo] = useState<UserInfo | null>(() => {
         const storedUser = sessionStorage.getItem("userInfo");
@@ -73,6 +122,8 @@ const Header = () => {
                     </div>
                 </div>
             </div>
+
+            <NickNameModal open={showModal} onClose={() => setShowModal(false)} onSubmit={handleNicknameSubmit} googleInfo={googleInfo}/>
         </div>
     );
 };
