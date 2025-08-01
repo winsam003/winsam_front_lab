@@ -9,6 +9,9 @@ import CommunityWrite from "./pages/community/CommunityWrite";
 import CommunityUpdate from "./pages/community/CommunityUpdate";
 
 function App() {
+    const test = sessionStorage.getItem("userInfo");
+    console.log(test);
+
     return (
         <div className="App">
             <BrowserRouter>

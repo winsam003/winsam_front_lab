@@ -1,4 +1,5 @@
 import { useBoardList } from "@/api/BBSCommon/UseBBSCommonQuery";
+import BlogListBtnSection from "@/domain/blog/blogListBtnSection";
 import Linkto from "@/shared/components/linkto/Linkto";
 import PostPreviewList from "@/shared/components/postPreviewList/PostPreviewList";
 
@@ -11,6 +12,10 @@ const Blog = () => {
             {/* 링크 영역 */}
             <section>
                 <Linkto />
+            </section>
+
+            <section className="flex justify-end">
+                <BlogListBtnSection />
             </section>
 
             {/* 블로그 포스트 목록 */}
