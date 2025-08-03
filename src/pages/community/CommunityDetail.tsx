@@ -16,6 +16,9 @@ const CommunityDetail = () => {
         post_numb: isNaN(postId) ? 0 : postId,
     });
 
+    const userInfoString = sessionStorage.getItem("userInfo");
+    const userInfo = userInfoString ? JSON.parse(userInfoString) : null;
+
     return (
         <div className="max-w-screen-lg mx-auto w-full px-4 py-8 space-y-6">
             <Linkto />

@@ -13,6 +13,9 @@ const Community = () => {
 
     const params = { bbs_numb: "BBS0000001", page: 1, size: 9999 };
     const { data, isLoading, error } = useBoardList(params);
+
+    const userInfoString = sessionStorage.getItem("userInfo");
+    const userInfo = userInfoString ? JSON.parse(userInfoString) : null;
     return (
         <div className="max-w-screen-lg mx-auto w-full px-4 py-8 space-y-6">
             {/* 네비게이션 링크 */}
@@ -21,9 +24,13 @@ const Community = () => {
             </section>
 
             {/* 버튼 섹션 */}
-            <section>
-                <CommunityListButSection />
-            </section>
+            {userInfo ? (
+                <section>
+                    <CommunityListButSection />
+                </section>
+            ) : (
+                ""
+            )}
 
             {/* 데이터 로딩/에러/테이블 */}
             <section>

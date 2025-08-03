@@ -15,7 +15,7 @@ const PostPreviewList = ({ BBSList }: props) => {
             {BBSList?.length !== 0 ? (
                 BBSList?.map((item, index) => {
                     return (
-                        <div key={index} className="flex max-h-[300px] mt-4 mb-12">
+                        <div key={index} className="flex flex-col max-h-[450px] mt-4 mb-12 gap-4 sm:flex-row sm:max-h-[300px]">
                             <div
                                 className="flex-1 cursor-pointer"
                                 onClick={() => {

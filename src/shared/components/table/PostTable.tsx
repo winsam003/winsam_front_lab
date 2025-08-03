@@ -17,9 +17,12 @@ const PostTable = ({ goToDetail, BBSList }: props) => {
                             <TableRow className="flex">
                                 <TableHead className="flex-1 flex items-center justify-center text-[16px]">번호</TableHead>
                                 <TableHead className="flex-5 flex items-center justify-center text-[16px]">제목</TableHead>
-                                <TableHead className="flex-2 flex items-center justify-center text-[16px]">등록자</TableHead>
-                                <TableHead className="flex-2 flex items-center justify-center text-[16px]">등록일</TableHead>
+                                <TableHead className="flex-3 flex items-center justify-center text-[16px]">등록자</TableHead>
+                                <TableHead className="flex-3 flex items-center justify-center text-[16px]">등록일</TableHead>
+                                <TableHead className="flex-3 flex items-center justify-center text-[16px]">수정자</TableHead>
+                                <TableHead className="flex-3 flex items-center justify-center text-[16px]">수정일</TableHead>
                                 <TableHead className="flex-1 flex items-center justify-center text-[16px]">조회수</TableHead>
+                                <TableHead className="flex-1 flex items-center justify-center text-[16px]">댓글수</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -29,9 +32,12 @@ const PostTable = ({ goToDetail, BBSList }: props) => {
                                     <TableCell className="flex-5 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
                                         {item.bbs_post_sbjt}
                                     </TableCell>
-                                    <TableCell className="flex-2 flex items-center justify-center">{item.reg_user}</TableCell>
-                                    <TableCell className="flex-2 flex items-center justify-center">{item.reg_date}</TableCell>
+                                    <TableCell className="flex-3 flex items-center justify-center">{item.reg_user}</TableCell>
+                                    <TableCell className="flex-3 flex items-center justify-center">{item.reg_date}</TableCell>
+                                    <TableCell className="flex-3 flex items-center justify-center">{item.updt_user}</TableCell>
+                                    <TableCell className="flex-3 flex items-center justify-center">{item.updt_date}</TableCell>
                                     <TableCell className="flex-1 flex items-center justify-center">{item.read_cnt}</TableCell>
+                                    <TableCell className="flex-1 flex items-center justify-center">{0}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
