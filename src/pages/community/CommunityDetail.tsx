@@ -25,7 +25,8 @@ const CommunityDetail = () => {
         <div className="max-w-screen-lg mx-auto w-full px-4 py-8 space-y-6">
             <Linkto />
 
-            <CommunityDetailBtnSection postId={String(postId)} postDetail={data} />
+            {userInfo ? <CommunityDetailBtnSection postId={String(postId)} postDetail={data} /> : ""}
+
             <div className="flex flex-col gap-4 mt-4 mb-4">
                 <div>
                     <Input placeholder="제목" readOnly value={data?.bbs_post_sbjt} />
