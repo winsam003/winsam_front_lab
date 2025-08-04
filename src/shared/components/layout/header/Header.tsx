@@ -98,17 +98,32 @@ const Header = () => {
                     </Link>
                     <div className="flex gap-4">
                         {userInfo ? (
-                            <MdLogout
-                                size={30}
-                                color="white"
-                                onClick={() => {
-                                    logout();
-                                    window.dispatchEvent(new Event("userLoggedOut")); // 상태 갱신
-                                }}
-                                className="cursor-pointer"
-                            />
+                            <div
+                                onClick={logout}
+                                className="flex items-center gap-2 cursor-pointer text-white hover:text-red-500 transition"
+                            >
+                                <MdLogout size={24} />
+                                <span>로그아웃</span>
+                            </div>
                         ) : (
-                            <MdLogin size={30} color="white" onClick={startLogin} className="cursor-pointer" />
+                            // <MdLogout
+                            //     size={30}
+                            //     color="white"
+                            //     onClick={() => {
+                            //         logout();
+                            //         // window.dispatchEvent(new Event("userLoggedOut")); // 상태 갱신
+                            //         window.location.reload();
+                            //     }}
+                            //     className="cursor-pointer"
+                            // />
+                            // <MdLogin size={30} color="white" onClick={startLogin} className="cursor-pointer" />
+                            <div
+                                onClick={startLogin}
+                                className="flex items-center gap-2 cursor-pointer text-white hover:text-green-400 transition"
+                            >
+                                <MdLogin size={24} />
+                                <span>로그인</span>
+                            </div>
                         )}
                     </div>
                 </div>
@@ -123,7 +138,7 @@ const Header = () => {
                 </div>
             </div>
 
-            <NickNameModal open={showModal} onClose={() => setShowModal(false)} onSubmit={handleNicknameSubmit} googleInfo={googleInfo}/>
+            <NickNameModal open={showModal} onClose={() => setShowModal(false)} onSubmit={handleNicknameSubmit} googleInfo={googleInfo} />
         </div>
     );
 };

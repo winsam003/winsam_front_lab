@@ -54,7 +54,7 @@ const PostPreviewList = ({ BBSList }: props) => {
                                 <Line />
                                 <div className="flex gap-4 mt-4">
                                     <div className="text-[12px]">조회수 {item.read_cnt}</div>
-                                    <div className="text-[12px]">댓글 0</div>
+                                    <div className="text-[12px]">댓글 {item.cmnt_count}</div>
                                 </div>
                             </div>
                         </div>

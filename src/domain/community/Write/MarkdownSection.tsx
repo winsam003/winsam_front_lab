@@ -178,7 +178,7 @@ const MarkdownSection = () => {
                     <FormField name="post_subj" render={({ field }) => <Input {...field} placeholder="제목" />} />
                 </div>
                 <div className="flex-1">
-                    <FormField name="reg_user" render={({ field }) => <Input {...field} placeholder="작성자" />} />
+                    <FormField name="reg_user" render={({ field }) => <Input {...field} placeholder="작성자" readOnly/>} />
                     {/* <FormField name="reg_dttm" render={({ field }) => <Input {...field} placeholder="작성일" disabled />} />
                     <FormField name="read_cnt" render={({ field }) => <Input {...field} placeholder="조회수" disabled />} /> */}
                 </div>

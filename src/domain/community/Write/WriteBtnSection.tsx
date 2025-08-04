@@ -29,25 +29,25 @@ const WriteBtnSection = ({ btnType = "submit", btnName, postId, postDetail }: pr
                     <GiHamburgerMenu />
                     목록
                 </Button>
-                {firstSegment !== "blog" ? (
-                    <Button
-                        className="h-8 text-[12px]"
-                        type={btnType}
-                        onClick={
-                            btnType === "button"
-                                ? () =>
-                                      navigate(`/community/bbs/common/update/${postId}`, {
-                                          state: { postDetail },
-                                      })
-                                : undefined
-                        }
-                    >
-                        <CiSaveDown2 />
-                        {btnName ? btnName : "등록"}
-                    </Button>
-                ) : (
+                {/* {firstSegment !== "blog" ? ( */}
+                <Button
+                    className="h-8 text-[12px]"
+                    type={btnType}
+                    onClick={
+                        btnType === "button"
+                            ? () =>
+                                  navigate(`/${firstSegment}/bbs/common/update/${postId}`, {
+                                      state: { postDetail },
+                                  })
+                            : undefined
+                    }
+                >
+                    <CiSaveDown2 />
+                    {btnName ? btnName : "등록"}
+                </Button>
+                {/* ) : (
                     ""
-                )}
+                )} */}
             </div>
         </div>
     );

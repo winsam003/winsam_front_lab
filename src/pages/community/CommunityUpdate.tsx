@@ -20,6 +20,7 @@ const CommunityUpdate = () => {
         resolver: zodResolver(BBSWriteSchema) as Resolver<BBSWriteSchemaType>,
         defaultValues: BBSWriteSchemaDefaultValue,
     });
+    const firstSegment = location.pathname.split("/")[1];
     useEffect(() => {
         BBSWriteForm.reset({
             bbs_numb: postDetail.bbs_code,
@@ -50,7 +51,7 @@ const CommunityUpdate = () => {
             onSuccess: () => {
                 alert("수정되었습니다.");
                 BBSWriteForm.reset({ ...BBSWriteSchemaDefaultValue });
-                navigate("/community");
+                navigate(`/${firstSegment}`);
             },
             onError: (error) => {
                 console.error("수정 실패:", error);

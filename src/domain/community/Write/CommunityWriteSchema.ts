@@ -13,7 +13,7 @@ export const BBSWriteSchema = z.object({
 export type BBSWriteSchemaType = z.infer<typeof BBSWriteSchema>;
 
 export const BBSWriteSchemaDefaultValue: BBSWriteSchemaType = {
-    bbs_numb: "BBS0000001", // 자유게시판
+    bbs_numb: "", // 자유게시판
     post_subj: "",
     post_cnts: "",
     reg_user: "",

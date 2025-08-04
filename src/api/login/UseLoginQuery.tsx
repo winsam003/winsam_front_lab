@@ -25,7 +25,8 @@ export const useGoogleLogin = (onNeedNickname?: (accessToken: string, userName: 
                     try {
                         const decoded = jwtDecode<UserInfo>(accessToken);
                         sessionStorage.setItem("userInfo", JSON.stringify(decoded));
-                        window.dispatchEvent(new Event("userLoggedIn"));
+                        // window.dispatchEvent(new Event("userLoggedIn"));
+                        window.location.reload();
                     } catch (err) {
                         console.error("토큰 디코딩 실패", err);
                     }
@@ -55,6 +56,7 @@ export const useLogout = () => {
                 });
                 sessionStorage.removeItem("userInfo");
                 alert("로그아웃 되었습니다.");
+                window.location.href = "/";
             }
             // 로그아웃 후 상태 초기화, 리다이렉트 등 추가
             // 예: window.location.href = '/login';

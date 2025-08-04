@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type Resolver } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import { useCommunityWrite } from "@/api/BBSCommon/UseBBSCommonQuery";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import Linkto from "@/shared/components/linkto/Linkto";
 import { useEffect } from "react";
 
@@ -16,6 +16,12 @@ const CommunityWrite = () => {
         defaultValues: BBSWriteSchemaDefaultValue,
     });
 
+    const [searchParams] = useSearchParams();
+    const bbsnumb = searchParams.get("bbsnumb");
+
+    const location = useLocation();
+    const firstSegment = location.pathname.split("/")[1];
+
     const userInfo = JSON.parse(sessionStorage.getItem("userInfo") || "null");
 
     useEffect(() => {
@@ -23,6 +29,7 @@ const CommunityWrite = () => {
             BBSWriteForm.reset({
                 ...BBSWriteSchemaDefaultValue,
                 reg_user: userInfo.userNickName,
+                bbs_numb: bbsnumb || "BBS0000001",
             });
         }
     }, []);
@@ -42,7 +49,7 @@ const CommunityWrite = () => {
             onSuccess: () => {
                 alert("등록되었습니다.");
                 BBSWriteForm.reset({ ...BBSWriteSchemaDefaultValue });
-                navigate("/community");
+                navigate(`/${firstSegment}`);
             },
             onError: (error) => {
                 console.error("등록 실패:", error);

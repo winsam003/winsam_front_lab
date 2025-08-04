@@ -2,6 +2,8 @@ import { useBoardDetail } from "@/api/BBSCommon/UseBBSCommonQuery";
 import { Input } from "@/components/ui/input";
 import CommunityDetailBtnSection from "@/domain/community/detail/CommunityDetailBtnSection";
 import CommunityDetailCntSection from "@/domain/community/detail/CommunityDetailCntSection";
+import CommentBox from "@/shared/components/comment/CommentBox";
+import CommentInputBox from "@/shared/components/comment/CommentInputBox";
 import Linkto from "@/shared/components/linkto/Linkto";
 import { useLocation, useParams } from "react-router-dom";
 
@@ -28,10 +30,23 @@ const CommunityDetail = () => {
                 <div>
                     <Input placeholder="제목" readOnly value={data?.bbs_post_sbjt} />
                 </div>
-                <div className="flex gap-4">
-                    <Input placeholder="작성자" readOnly value={data?.reg_user} />
+                <div className="flex gap-4 justify-end text-[12px] mr-4">
+                    <div>
+                        <span className="font-bold">작성자: </span>
+                        <span>{data?.reg_user}</span>
+                    </div>
+                    <div>
+                        <span className="font-bold">작성일: </span>
+                        <span>{data?.reg_date}</span>
+                    </div>
+                    <div>
+                        <span className="font-bold">조회수: </span>
+                        <span>{data?.read_cnt}</span>
+                    </div>
+
+                    {/* <Input placeholder="작성자" readOnly value={data?.reg_user} />
                     <Input placeholder="작성일" readOnly value={data?.reg_date} />
-                    <Input placeholder="조회수" readOnly value={data?.read_cnt} />
+                    <Input placeholder="조회수" readOnly value={data?.read_cnt} /> */}
                 </div>
             </div>
             <section>
@@ -42,6 +57,17 @@ const CommunityDetail = () => {
                 ) : (
                     !isLoading && !error && <div className="text-gray-500">게시글이 없습니다.</div>
                 )}
+            </section>
+            <section>
+                {userInfo ? <CommentInputBox /> : ""}
+                {data &&
+                    data.cmntVOList?.map((item, index) => {
+                        return (
+                            <div key={index}>
+                                <CommentBox cmntVO={item} />
+                            </div>
+                        );
+                    })}
             </section>
         </div>
     );

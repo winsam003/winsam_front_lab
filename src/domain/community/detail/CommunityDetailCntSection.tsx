@@ -11,7 +11,7 @@ type props = {
 const CommunityDetailCntSection = ({ postDetail }: props) => {
     return (
         <div>
-            <div className="flex-1 min-h-[500px] h-full p-2.5 border border-gray-300 overflow-y-auto bg-gray-50 rounded-2xl">
+            <div className="flex-1 min-h-[700px] h-full p-4 border border-gray-300 overflow-y-auto bg-gray-50 rounded-2xl">
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm, remarkBreaks]}
                     rehypePlugins={[rehypeRaw]}

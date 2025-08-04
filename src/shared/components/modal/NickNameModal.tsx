@@ -5,10 +5,10 @@ import type { UserInfo } from "@/store/useUserInfo";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { useEffect, useState } from "react";
 import { useForm, type Resolver } from "react-hook-form";
-import { NicknameShema, NicknameShemaDefaultValue, type NicknameShemaType } from "./set-nicknameShema/set-nicknameShema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormField } from "@/components/ui/form";
 import { useSetNickName } from "@/api/login/UseLoginQuery";
+import { NicknameShema, NicknameShemaDefaultValue, type NicknameShemaType } from "./set-nicknameShema/Set-nicknameShema";
 
 const NickNameModal = ({
     open,

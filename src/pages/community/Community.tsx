@@ -2,6 +2,7 @@ import { useBoardList } from "@/api/BBSCommon/UseBBSCommonQuery";
 import CommunityListButSection from "@/domain/community/CommunityListBtnSection";
 import Linkto from "@/shared/components/linkto/Linkto";
 import PostTable from "@/shared/components/table/PostTable";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Community = () => {
@@ -10,8 +11,10 @@ const Community = () => {
     const goToDetail = (id: number) => {
         navigate(`/community/bbs/common/detail/${id}?code=BBS0000001`);
     };
+    const [page, setPage] = useState(1);
+    const size = 25;
 
-    const params = { bbs_numb: "BBS0000001", page: 1, size: 9999 };
+    const params = { bbs_numb: "BBS0000001", page: page, size: size };
     const { data, isLoading, error } = useBoardList(params);
 
     const userInfoString = sessionStorage.getItem("userInfo");
@@ -36,7 +39,7 @@ const Community = () => {
             <section>
                 {isLoading && <div className="text-gray-600">로딩 중...</div>}
                 {error && <div className="text-red-500">에러 발생: {error.message}</div>}
-                {!isLoading && !error && <PostTable goToDetail={goToDetail} BBSList={data?.bbslist || []} />}
+                {!isLoading && !error && <PostTable goToDetail={goToDetail} BBSList={data?.bbslist || []} page={page} setPage={setPage} pageInfo={data?.pageInfo}/>}
             </section>
         </div>
     );

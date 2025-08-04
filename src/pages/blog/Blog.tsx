@@ -15,7 +15,7 @@ const Blog = () => {
             <section>
                 <Linkto />
             </section>
-            {userInfo && userInfo.userRole === "supervisor" ? (
+            {userInfo && userInfo.userRole === "SUPERVISOR" ? (
                 <section className="flex justify-end">
                     <BlogListBtnSection />
                 </section>
