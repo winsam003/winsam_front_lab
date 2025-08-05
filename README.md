@@ -1,13 +1,9 @@
 ## 🖥️ 기본스펙
 
 node: v22.13.1
-
 react: 19.1.0
-
 vite: 7.0.4
-
 tailwindcss: 4.1.11
-
 shadcn: 2.10.0
 
 
